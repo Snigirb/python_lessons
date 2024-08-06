@@ -1,0 +1,33 @@
+import pandas as pd
+import random
+lst = ['robot'] * 10
+lst += ['human'] * 10
+random.shuffle(lst)
+data = pd.DataFrame({'whoAmI':lst})
+data.head()
+"""
+# Решение через цикл и функции:
+def am_i_robot(x):
+    if x == 'robot':
+        return '1'
+    else:
+        return '0'
+
+def am_i_human(x):
+    if x == 'human':
+        return '1'
+    else:
+        return '0'
+data['robot'] = data['whoAmI'].apply(am_i_robot)
+data['human'] = data['whoAmI'].apply(am_i_human)
+print(data.drop('whoAmI', axis=1))
+"""
+
+"""
+# Решение через .loc:
+data.loc[data['whoAmI'] == 'robot', 'robot'] = '1'
+data.loc[data['whoAmI'] == 'human', 'robot'] = '0'
+data.loc[data['whoAmI'] == 'human', 'human'] = '1'
+data.loc[data['whoAmI'] == 'robot', 'human'] = '0'
+print(data.drop('whoAmI', axis=1))
+"""
